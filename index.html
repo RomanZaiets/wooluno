@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WOOLUNO — Customize. Create. Play.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #fff3dc;
+      --text: #141820;
+      --accent-dark: #141820;
+      --accent-red: #e6543a;
+      --accent-yellow: #f5b638;
+      --accent-blue: #2f7d9f;
+      --radius-lg: 24px;
+      --shadow-soft: 0 24px 60px rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 8vw 4px;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffe7bf;
+    }
+
+    .nav-logo img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .nav-title {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .btn-nav {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(20,24,32,0.12);
+      background: rgba(255,255,255,0.6);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    }
+
+    .btn-nav:hover {
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 8vw 60px;
+      gap: 40px;
+    }
+
+    .hero-left {
+      max-width: 520px;
+      text-align: left;
+    }
+
+    .hero-logo {
+      margin-bottom: 24px;
+    }
+
+    .hero-logo img {
+      max-width: 220px;
+      height: auto;
+      display: block;
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(120deg, var(--accent-red), var(--accent-yellow), var(--accent-blue));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      opacity: 0.86;
+      margin-bottom: 26px;
+      max-width: 480px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-dark);
+      color: #ffffff;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.26);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(20,24,32,0.2);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(20,24,32,0.3);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+    }
+
+    .hero-note {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .hero-right {
+      max-width: 420px;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.9);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.9);
+    }
+
+    .hero-card-header {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.65;
+    }
+
+    .hero-card-title {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .hero-card-text {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .hero-preview {
+      margin-top: 6px;
+      border-radius: 20px;
+      border: 1px dashed rgba(20,24,32,0.12);
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 10% 0%, #ffe7bf, transparent 55%),
+                  radial-gradient(circle at 100% 100%, #d8edf7, transparent 55%);
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(20,24,32,0.04);
+    }
+
+    .badge-red { background: rgba(230,84,58,0.1); }
+    .badge-yellow { background: rgba(245,182,56,0.14); }
+    .badge-blue { background: rgba(47,125,159,0.12); }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding-inline: 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        padding-inline: 20px;
+        padding-top: 18px;
+      }
+      .hero-left {
+        text-align: left;
+      }
+      .hero-logo img {
+        max-width: 180px;
+      }
+    }
+    /* ================================
+   MOBILE ADAPTATION (<768px)
+   ================================ */
+@media (max-width: 768px) {
+
+  body {
+    font-size: 15px;
+  }
+
+  /* NAVIGATION */
+  .nav {
+    padding: 14px 20px;
+  }
+
+  .nav-title {
+    font-size: 17px;
+  }
+
+  .nav-links {
+    display: none; /* hide desktop links */
+  }
+
+  .btn-nav {
+    display: none; /* hide nav button on mobile */
+  }
+
+
+  /* HERO SECTION */
+  .hero {
+    padding: 10px 20px 40px;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .hero-left {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero-logo img {
+    max-width: 150px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 30px;
+    margin-top: 10px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    max-width: 100%;
+    margin: 0 auto 20px;
+  }
+
+  .hero-cta-row {
+    justify-content: center;
+  }
+
+  .hero-right {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+
+  /* CARDS IN PRODUCT / CREATORS */
+  #product > div,
+  #creators > div {
+    flex-direction: column;
+  }
+
+  #product > div > div,
+  #creators > div > div {
+    min-width: 100%;
+    border-radius: 18px;
+    padding: 20px;
+  }
+
+
+  /* SECTION TITLES */
+  #product h2,
+  #creators h2,
+  #early h2 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  /* SECTION PARAGRAPHS */
+  #product p,
+  #creators p,
+  #early p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+  }
+
+
+
+
+
+  /* EARLY ACCESS BUTTON */
+  #early .btn-primary {
+    padding: 12px 28px;
+    font-size: 16px;
+  }
+
+
+
+  /* FOOTER */
+  footer {
+    padding: 40px 20px;
+  }
+
+  footer > div {
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  footer h4 {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  footer ul {
+    text-align: center;
+    line-height: 1.9;
+  }
+
+  footer img {
+    margin: 0 auto;
+  }
+
+  footer p {
+    text-align: center;
+  }
+
+  footer span {
+    display: block;
+    text-align: center;
+  }
+
+  footer div[style*="border-top"] p {
+    font-size: 12px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="nav">
+      <div class="nav-left">
+        <div class="nav-logo">
+          <img src="wooluno-logo.png" alt="WOOLUNO logo">
+        </div>
+        <div class="nav-title">WOOLUNO</div>
+      </div>
+      <div class="nav-links">
+        <a href="#product">Product</a>
+        <a href="#creators">For Creators</a>
+        <a href="#early">Early Access</a>
+        <button class="btn-nav">Get Early Access</button>
+      </div>
+    </header>
+
+    <main class="hero">
+      <section class="hero-left">
+        <div class="hero-logo">
+          <img src="wooluno-logo.png" alt="WOOLUNO logo">
+        </div>
+        <div class="hero-eyebrow">3D knitwear · Gaming · Creator economy</div>
+        <h1 class="hero-title">
+          Customize. <span class="hero-gradient">Create.</span> Play Your Sweater.
+        </h1>
+        <p class="hero-subtitle">
+          WOOLUNO lets you design a fully custom 3D sweater, unlock rare colors and patterns through a game, and turn your creation into a real premium knit — made just for you.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#early" class="btn-primary">Get Early Access</a>
+          <a href="#demo" class="btn-ghost">Watch Concept Demo ▸</a>
+        </div>
+        <div class="hero-note">
+          Be among the first 1,000 creators to unlock exclusive colors and patterns.
+        </div>
+      </section>
+
+      <aside class="hero-right">
+        <div class="hero-card">
+          <div class="hero-card-header">Preview</div>
+          <div class="hero-card-title">Real-time 3D knitwear preview</div>
+          <div class="hero-card-text">
+            See the exact sweater you’ll receive — with live materials, colors, and knit patterns — before it’s made.
+          </div>
+          <div class="hero-preview">
+            Future 3D sweater preview lives here.
+          </div>
+          <div class="hero-badges">
+            <span class="badge badge-red">Play to unlock colors</span>
+            <span class="badge badge-yellow">One-of-one sweaters</span>
+            <span class="badge badge-blue">Creator-ready platform</span>
+          </div>
+        </div>
+      </aside>
+    </main>
+          <!-- PRODUCT SECTION -->
+      <section id="product" style="width:100%; margin-top:80px; padding:0 8vw;">
+        <h2 style="
+          font-size:36px;
+          font-weight:800;
+          margin-bottom:16px;
+          letter-spacing:-0.03em;
+        ">The Product</h2>
+
+        <p style="max-width:620px; font-size:17px; opacity:0.8; margin-bottom:32px;">
+          WOOLUNO combines a 3D sweater configurator, a play-to-create reward system, 
+          and an on-demand manufacturing pipeline to produce truly one-of-one premium knitwear.
+        </p>
+
+        <div style="display:flex; flex-wrap:wrap; gap:26px;">
+
+          <div style="
+            flex:1; min-width:260px;
+            background:white;
+            padding:24px;
+            border-radius:24px;
+            box-shadow:0 18px 50px rgba(0,0,0,0.06);
+          ">
+            <h3 style="font-size:20px; font-weight:700; margin-bottom:8px;">Real-time 3D Builder</h3>
+            <p style="font-size:15px; opacity:0.75;">
+              Customize shape, materials, knit patterns, and color zones with live visual feedback.
+            </p>
+          </div>
+
+          <div style="
+            flex:1; min-width:260px;
+            background:white;
+            padding:24px;
+            border-radius:24px;
+            box-shadow:0 18px 50px rgba(0,0,0,0.06);
+          ">
+            <h3 style="font-size:20px; font-weight:700; margin-bottom:8px;">Play-to-Create</h3>
+            <p style="font-size:15px; opacity:0.75;">
+              Unlock exclusive colors, rare patterns, badges, and materials through quests and levels.
+            </p>
+          </div>
+
+          <div style="
+            flex:1; min-width:260px;
+            background:white;
+            padding:24px;
+            border-radius:24px;
+            box-shadow:0 18px 50px rgba(0,0,0,0.06);
+          ">
+            <h3 style="font-size:20px; font-weight:700; margin-bottom:8px;">On-demand Production</h3>
+            <p style="font-size:15px; opacity:0.75;">
+              Every sweater is made individually from your 3D file — no inventory, no waste.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- FOR CREATORS SECTION -->
+      <section id="creators" style="width:100%; margin-top:100px; padding:0 8vw;">
+        <h2 style="
+          font-size:36px;
+          font-weight:800;
+          margin-bottom:16px;
+          letter-spacing:-0.03em;
+        ">For Creators</h2>
+
+        <p style="max-width:620px; font-size:17px; opacity:0.8; margin-bottom:32px;">
+          WOOLUNO gives influencers, designers, and streamers a new way to launch 
+          fully customizable sweater collections — without designers, factories, or inventory.
+        </p>
+
+        <div style="display:flex; flex-wrap:wrap; gap:26px;">
+
+          <div style="
+            flex:1; min-width:260px;
+            background:white;
+            padding:24px;
+            border-radius:24px;
+            box-shadow:0 18px 50px rgba(0,0,0,0.06);
+          ">
+            <h3 style="font-size:20px; font-weight:700; margin-bottom:8px;">Design in Minutes</h3>
+            <p style="font-size:15px; opacity:0.75;">
+              Create branded sweaters instantly using our 3D builder — no technical skills required.
+            </p>
+          </div>
+
+          <div style="
+            flex:1; min-width:260px;
+            background:white;
+            padding:24px;
+            border-radius:24px;
+            box-shadow:0 18px 50px rgba(0,0,0,0.06);
+          ">
+            <h3 style="font-size:20px; font-weight:700; margin-bottom:8px;">Creator Shop</h3>
+            <p style="font-size:15px; opacity:0.75;">
+              Publish designs, let fans customize them, and earn from every sale.
+            </p>
+          </div>
+
+          <div style="
+            flex:1; min-width:260px;
+            background:white;
+            padding:24px;
+            border-radius:24px;
+            box-shadow:0 18px 50px rgba(0,0,0,0.06);
+          ">
+            <h3 style="font-size:20px; font-weight:700; margin-bottom:8px;">No Inventory Needed</h3>
+            <p style="font-size:15px; opacity:0.75;">
+              All products are made-to-order — creators never risk unsold stock.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- EARLY ACCESS SECTION -->
+      <section id="early" style="width:100%; margin-top:110px; padding:0 8vw 120px; text-align:center;">
+        <h2 style="
+          font-size:38px;
+          font-weight:800;
+          margin-bottom:16px;
+          letter-spacing:-0.03em;
+        ">Early Access</h2>
+
+        <p style="
+          max-width:600px;
+          margin:0 auto 32px;
+          font-size:17px;
+          opacity:0.83;
+        ">
+          Become one of the first 1,000 users to try WOOLUNO.  
+          Unlock exclusive patterns, limited colors, and get rewards once the platform launches.
+        </p>
+
+        <a href="#" class="btn-primary" style="
+          padding:14px 36px;
+          font-size:17px;
+          border-radius:999px;
+          text-decoration:none;
+        ">Join Early Access</a>
+
+        <p style="margin-top:12px; opacity:0.7; font-size:14px;">
+          No spam. Just updates, access, and rewards.
+        </p>
+      </section>
+      <!-- FOOTER -->
+      <footer style="
+        width:100%;
+        background: #fff8e8;
+        border-top:1px solid rgba(20,24,32,0.08);
+        margin-top:40px;
+        padding:50px 8vw 60px;
+      ">
+
+        <div style="
+          display:flex;
+          flex-wrap:wrap;
+          gap:40px;
+          justify-content:space-between;
+          margin-bottom:50px;
+        ">
+
+          <!-- LOGO COLUMN -->
+          <div style="flex:1; min-width:220px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+              <img src="wooluno-logo.png" alt="WOOLUNO" style="width:44px; height:44px;">
+              <span style="
+                font-size:22px;
+                font-weight:800;
+                letter-spacing:-0.03em;
+              ">WOOLUNO</span>
+            </div>
+
+            <p style="max-width:260px; opacity:0.7; font-size:14px; line-height:1.4;">
+              The future of customizable 3D knitwear — powered by gaming, creativity, and on-demand fashion technology.
+            </p>
+          </div>
+
+          <!-- PRODUCT COLUMN -->
+          <div style="flex:1; min-width:160px;">
+            <h4 style="font-size:15px; font-weight:700; margin-bottom:12px;">Product</h4>
+
+            <ul style="list-style:none; padding:0; margin:0; font-size:14px; line-height:1.8; opacity:0.78;">
+              <li><a href="#product" style="text-decoration:none; color:inherit;">3D Builder</a></li>
+              <li><a href="#product" style="text-decoration:none; color:inherit;">Play-to-Create</a></li>
+              <li><a href="#product" style="text-decoration:none; color:inherit;">On-Demand Production</a></li>
+              <li><a href="#product" style="text-decoration:none; color:inherit;">Social Features</a></li>
+            </ul>
+          </div>
+
+          <!-- FOR CREATORS COLUMN -->
+          <div style="flex:1; min-width:160px;">
+            <h4 style="font-size:15px; font-weight:700; margin-bottom:12px;">For Creators</h4>
+
+            <ul style="list-style:none; padding:0; margin:0; font-size:14px; line-height:1.8; opacity:0.78;">
+              <li><a href="#creators" style="text-decoration:none; color:inherit;">Creator Shop</a></li>
+              <li><a href="#creators" style="text-decoration:none; color:inherit;">Launch a Collection</a></li>
+              <li><a href="#creators" style="text-decoration:none; color:inherit;">Earn from Fans</a></li>
+              <li><a href="#creators" style="text-decoration:none; color:inherit;">No Inventory Needed</a></li>
+            </ul>
+          </div>
+
+          <!-- COMPANY COLUMN -->
+          <div style="flex:1; min-width:160px;">
+            <h4 style="font-size:15px; font-weight:700; margin-bottom:12px;">Company</h4>
+
+            <ul style="list-style:none; padding:0; margin:0; font-size:14px; line-height:1.8; opacity:0.78;">
+              <li><a href="#early" style="text-decoration:none; color:inherit;">Early Access</a></li>
+              <li><a href="#demo" style="text-decoration:none; color:inherit;">Concept Demo</a></li>
+              <li><a href="#" style="text-decoration:none; color:inherit;">Contact</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div style="border-top:1px solid rgba(20,24,32,0.06); padding-top:18px;">
+          <p style="font-size:13px; opacity:0.6;">
+            © 2025 WOOLUNO. All rights reserved.
+          </p>
+        </div>
+
+      </footer>
+
+  </div>
+</body>
+</html>
